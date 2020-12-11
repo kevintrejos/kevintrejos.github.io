@@ -1,8 +1,14 @@
 ---
-title: "Blog Post #1"
+title: "Blog Post 1"
 author: "Kevin Trejos"
-date: "12/09/2020"
 output: html_document
+runtime: shiny
+date: '2020-12-04'
+slug: lab-2-content
+categories:
+  - Blog
+tags:
+  - Licari
 ---
 
 ```{r, echo=FALSE, message=FALSE, tidy=TRUE}
@@ -61,4 +67,4 @@ ggplot(data = fl_time_data) + geom_line(aes(x= year, y= candidatevotes), color="
 
 ### Conclusions
 
-> While access to voting is a vital aspect to American democracy, 
+> While access to voting is a vital aspect to American democracy, maybe it is time to reconsider the electoral college's purpose.
