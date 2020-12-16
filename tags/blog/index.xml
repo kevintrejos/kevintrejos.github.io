@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog on Kevin&#39;s Blog</title>
+    <link>https://kevintrejos.github.io/tags/blog/</link>
+    <description>Recent content in blog on Kevin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright © 2020, Kevin Trejos</copyright>
+    <lastBuildDate>Wed, 16 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://kevintrejos.github.io/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Why Data Is Not Everything</title>
+      <link>https://kevintrejos.github.io/post/2020-12-16-why-data-is-not-everything/</link>
+      <pubDate>Wed, 16 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://kevintrejos.github.io/post/2020-12-16-why-data-is-not-everything/</guid>
+      <description>Why Data Is Not Everything Introduction  Everyone knows the importance data has on our everyday life. It dictates how our world in run and increasingly how literally everything works thanks to machine learning. However, anyone who has worked in the world of data and statistics, knows that it has limits. How limited is data? Well that is determined by how good the collection of it is.
+ In Politics  Take the case of the 2016 Election, where every major political statistician had predicted a landslide Hillary Clinton win.</description>
+    </item>
+    
+  </channel>
+</rss>
