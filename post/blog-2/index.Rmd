@@ -23,18 +23,18 @@ In high school, I grew especially interested in alternative voting styles, spurr
 
 ## What Florida Looks like Today
 
-![Florida's House Congressional Delegation by Party, 117th Congress](/2020-12-16-blog-2/index_files/Florida_Congressional_Election_Results_2020.png){width=500px}
+![Florida's House Congressional Delegation by Party, 117th Congress](/Users/kevintrejos/Desktop/R Stuff/Florida_Congressional_Election_Results_2020.png){width=500px,height=700px}
 
 ## Florida in 2016 and 2018
 
-![Florida's House Congressional Delegation by Party, 116th Congress](/2020-12-16-blog-2/index_files/1920px-Florida_Congressional_Election_Results_2018.png){width=500px}
+![Florida's House Congressional Delegation by Party, 116th Congress](/Users/kevintrejos/Desktop/R Stuff/1920px-Florida_Congressional_Election_Results_2018.png){width=500px}
 
-![Florida's House Congressional Delegation by Party, 115th Congress](/2020-12-16-blog-2/index_files/2016floridacongressionaldistrictsresults.png){width=500px}
+![Florida's House Congressional Delegation by Party, 115th Congress](/Users/kevintrejos/Desktop/R Stuff/2016floridacongressionaldistrictsresults.png){width=500px}
 
 > As you can see, there is hardly any change in which party holds each seat. Over the past 3 years, only two seats have changed parties: FL-26 and FL-27 which briefly went Democrat for the 116th Congress.
 
 
-```{r pressure, echo=FALSE, message=FALSE, tidy=TRUE}
+```{r pressure, echo=FALSE, message=FALSE, tidy=TRUE, warning=FALSE}
 library(ggplot2)
 library(ggthemes)
 library(RColorBrewer)
