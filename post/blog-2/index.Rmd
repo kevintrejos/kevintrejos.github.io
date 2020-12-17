@@ -1,0 +1,230 @@
+---
+title: 'Blog 2: A Simplified Look at What Multimember Congressional Districts Would
+  Look Like In Floriida'
+author: Kevin Trejos
+date: '2020-12-16'
+slug: blog-2
+categories:
+  - Blog
+tags:
+  - blog
+  - elections
+  - electoral reform
+  - florida
+---
+
+# Multimember Congressional Districts In Florida
+
+## Introduction
+
+One of the things that has fascinated me the most about U.S. Politics versus the rest of the world is how our elections work. No, I am not referring to our wonky electoral college system, but rather our preferred voting systed: First-Past-The-Post Single member districts. All across the country, almost every single election is won by a candidate receiving the pluraluty of votes (or sometimes even a majority is required, how exciting!).  
+
+In high school, I grew especially interested in alternative voting styles, spurred by a video by [CGP Grey](https://youtu.be/l8XOZJkozfI). My interest was peaked when I was given the option to research any topic I wanted for my AP Capstone Research class in senior year. Naturally, I chose to research what Florida's legislature would look like if it had 3 and 5 member districts. Now, nearly 4 years later as a college junior, I understand what I wrote about much better (and understand that what I wrote was not that great). In my high school project, I mainly focused on the qualitative changes a multimember district could bring. Today, I would like to briefly explore what the vote total look like in Floridian Congressional Districts.
+
+## What Florida Looks like Today
+
+![Florida's House Congressional Delegation by Party, 117th Congress](/2020-12-16-blog-2/index_files/Florida_Congressional_Election_Results_2020.png){width=500px}
+
+## Florida in 2016 and 2018
+
+![Florida's House Congressional Delegation by Party, 116th Congress](/2020-12-16-blog-2/index_files/1920px-Florida_Congressional_Election_Results_2018.png){width=500px}
+
+![Florida's House Congressional Delegation by Party, 115th Congress](/2020-12-16-blog-2/index_files/2016floridacongressionaldistrictsresults.png){width=500px}
+
+> As you can see, there is hardly any change in which party holds each seat. Over the past 3 years, only two seats have changed parties: FL-26 and FL-27 which briefly went Democrat for the 116th Congress.
+
+
+```{r pressure, echo=FALSE, message=FALSE, tidy=TRUE}
+library(ggplot2)
+library(ggthemes)
+library(RColorBrewer)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(readxl)
+library(tidyverse)
+library(viridis)
+library(lubridate)
+library(scales)
+
+#download data
+fl_cong <- read_xlsx("/Users/kevintrejos/Desktop/R Stuff/2008-2018-house.xlsx")
+
+#clean
+fl_cong_data <- fl_cong %>%
+  rename(state = `state`) %>%
+  group_by(district) %>%
+  arrange(year) %>%
+  filter(state=="FLORIDA") %>%
+  filter(party=="DEMOCRAT") %>%
+  filter(district %in% c("1", "2", "3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","22","23","24","25","26","27"))
+
+as.Date(parse_date_time(fl_cong_data$year, "%Y"))
+
+#plot
+ggplot(data = fl_cong_data, aes(x= year, y= candidate_pct, group=district, color=district)) + geom_line() + geom_point() + scale_x_continuous(breaks=c(2008,2010,2012,2014,2016,2018,2020)) + ylim(c(0.1,.95)) + theme_light() + scale_color_gradientn(colours = rainbow(14)) + ylab("Democrat Vote Percentage \n") + xlab("\n Election Year") + labs(title= "Votes for Democrat Congressional Candidates in Florida Over Time")
+
+```
+> Note: Florida experienced a redistricting in 2015 that may have affected certain elections.
+
+As you can see based off the graph, the Democrats have been making steady advances in congressional election since 2010. But many of the races are uncompetitive and sometimes not even contested. This is not somethign that would happen in a multimember election, where the possibility of a party/candidate reaching the 33% mark to attain a seat is very possible.
+
+## The 3-Member Congressional Districts
+
+![What a Potential Multimember Map Would Look Like in Florida](/2020-12-16-blog-2/index_files/Combined_Map.png)
+
+This map shows us that multimember maps can be very reflective of vote totals and still accomodate for minorty-majority districts.  
+Ideally, the map would be completely remade for multimember districts but this map is still useful to visualize what combining our current congressional districts would result in.
+
+## The "Fix" To Gerrymandering
+
+One of my favorite things about multimember districts is that it makes it harder to gerrymander. The larger a district is, the more obvious it is to find gerrymandering. Today, gerrymandering happens much less often than in the 1800s and 1900s. Today's voting district mapmakers are much more clever than those in the past, actually. Today's mapmakers tend to exploit the Voting Rights Act to justify questionable looking districts. In the case of Florida's 5th Congressional District, it was previously redistricted in 2015 after the Supreme Court found that gerrymandered to pack Democrats in one district. Yet, it was not an easy fight to take down the districts boundaries. Republican lawyers argued that the district was made that way to create a "minority-majority" district as required by the Voting Rights Act, but it was clear that this went beyond those motives as it created a district that was 80% Democrat and sprawled across 3 major cities.  
+
+With multimember districts, the requirement to create "minority-majority" districts is easier as districts only need to be 34% minority to fulfill the requirement. It also means that in smaller cities where minorities feel really minute, they still have a chance at being represented by at least 1 representitive that reflects their background.
+
+## Further Reading
+
+While I am not the biggest fan of FiveThirtyEight, they occasionally make some really thought provoking projects such as their [Atlas Of Redistricting](https://projects.fivethirtyeight.com/redistricting-maps/florida/). Here, FiveThirtyEight makes multiple maps showing how redistricting can affect the state's congressional delegation. The map proves how hard it is to create districts that are reflective of thier consituents while also creating a complete picture of Florida's voters.
+
+## Final Thoughts
+
+I think we really need to start testing multimember districts in the United States, especially with different voting formats to understand which are preferred for voters and most reflective of the voter's views in each district.
+
+
+
+```{r echo=FALSE, eval=FALSE,warning=FALSE,message=FALSE}
+
+#clean
+fl_cong_data <- fl_cong %>%
+  rename(state = `state`) %>%
+  group_by(state) %>%
+  arrange(year) %>%
+  filter(state== "FLORIDA")
+
+
+
+#present data
+
+library(reactable)
+
+reactable(fl_cong_data)
+
+library(reactable)
+library(htmltools)
+
+fl_cong <- read_xlsx("/Users/kevintrejos/Desktop/R Stuff/2008-2018-house.xlsx")
+
+info_cols <- c("year", "district", "global_d")
+candidate_cols <- c("party", "candidate")
+vote_cols <- c("candidatevotes","totalvotes")
+
+info_column <- function(maxWidth = 55, ...) {
+  colDef(maxWidth = maxWidth, align = "center", class = "cell number", ...)
+}
+
+candidate_column <- function(maxWidth = 70, class = NULL, ...) {
+  colDef(
+    cell = format_pct,
+    maxWidth = maxWidth,
+    class = paste("cell number", class),
+    style = function(value) {
+      # Lighter color for <1%
+      if (value < 0.01) {
+        list(color = "#aaa")
+      } else {
+        list(color = "#111", background = knockout_pct_color(value))
+      }
+    },
+    ...
+  )
+}
+
+tbl <- reactable(
+  fl_cong,
+  pagination = FALSE,
+  defaultSorted = "win_league",
+  defaultSortOrder = "desc",
+  defaultColGroup = colGroup(headerClass = "group-header"),
+  columnGroups = list(
+    colGroup(name = "Disrict", columns = info_cols),
+    colGroup(name = "Candidate", columns = candidate_cols),
+    colGroup(name = "Vote Totals", columns = knockout_cols)
+  ),
+  defaultColDef = colDef(class = "cell", headerClass = "header"),
+  columns = list(
+    team = colDef(
+      defaultSortOrder = "asc",
+      minWidth = 200,
+      headerStyle = list(fontWeight = 700), 
+      cell = function(value, index) {
+        div(
+          class = "team",
+          img(class = "flag", alt = paste(value, "flag"), src = sprintf("images/%s.png", value)),
+          div(class = "team-name", value),
+          div(class = "record", sprintf("%s pts.", fl_cong_data[index, "points"]))
+        )
+      }
+    ),
+    points = colDef(show = FALSE),
+    group = colDef(defaultSortOrder = "asc", align = "center", maxWidth = 75,
+                   class = "cell group", headerStyle = list(fontWeight = 700)),
+    spi = candidate_column(format = colFormat(digits = 1)),
+    global_o = candidate_column(
+      name = "Off.",
+      cell = function(value) {
+        scaled <- (value - min(fl_cong_data$global_o)) / (max(fl_cong_data$global_o) - min(fl_cong_data$global_o))
+        color <- off_rating_color(scaled)
+        value <- format(round(value, 1), nsmall = 1)
+        div(class = "spi-rating", style = list(background = color), value)
+      }
+    ),
+    global_d = candidate_column(
+      name = "Def.", 
+      defaultSortOrder = "asc",
+      cell = function(value) {
+        scaled <- 1 - (value - min(fl_cong_data$global_d)) / (max(fl_cong_data$global_d) - min(fl_cong_data$global_d))
+        color <- def_rating_color(scaled)
+        value <- format(round(value, 1), nsmall = 1)
+        div(class = "spi-rating", style = list(background = color), value)
+      }
+    ),
+    group_1 = group_column(name = "1st Place", class = "border-left"),
+    group_2 = group_column(name = "2nd Place"),
+    group_3 = group_column(name = "3rd Place"),
+    make_round_of_16 = knockout_column(name = "Make Round of 16", class = "border-left"),
+    make_quarters = knockout_column(name = "Make Qtr-Finals"),
+    make_semis = knockout_column(name = "Make Semifinals", maxWidth = 90),
+    make_final = knockout_column(name = "Make Final"),
+    win_league = knockout_column(name = "Win World Cup")
+  ),
+  # Emphasize borders between groups when sorting by group
+  rowClass = JS("
+    function(rowInfo, state) {
+      const firstSorted = state.sorted[0]
+      if (firstSorted && firstSorted.id === 'group') {
+        const nextRow = state.pageRows[rowInfo.viewIndex + 1]
+        if (nextRow && rowInfo.row.group !== nextRow.group) {
+          return 'group-last'
+        }
+      }
+    }"
+  ),
+  showSortIcon = FALSE,
+  borderless = TRUE,
+  class = "standings-table"
+)
+
+div(class = "standings",
+  div(class = "title",
+    h2("2019 Women's World Cup Predictions"),
+    "Soccer Power Index (SPI) ratings and chances of advancing for every team"
+  ),
+  tbl,
+  "Forecast from before 3rd group matches"
+)
+
+
+
+```
+
+
